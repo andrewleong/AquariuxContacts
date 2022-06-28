@@ -5,7 +5,7 @@ import styles from '../styles';
 
 const ContactDetail = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.mainContainer}>
       <Text>This is top text.</Text>
       <Text>This is bottom text.</Text>
     </SafeAreaView>
