@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  primaryColor: {
+    color: '#ff8c00',
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
