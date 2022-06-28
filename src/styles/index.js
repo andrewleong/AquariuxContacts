@@ -1,4 +1,9 @@
-export const styles = StyleSheet.create({
+import {StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
@@ -16,3 +21,5 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
+export default styles;

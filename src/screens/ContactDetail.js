@@ -1,8 +1,15 @@
 import React from 'react';
 import {Text} from 'react-native';
 
+import styles from '../styles';
+
 const ContactDetail = () => {
-  return <Text>Initial Contact Detail</Text>;
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <Text>This is top text.</Text>
+      <Text>This is bottom text.</Text>
+    </SafeAreaView>
+  );
 };
 
 export default ContactDetail;

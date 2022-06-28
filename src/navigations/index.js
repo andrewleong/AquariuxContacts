@@ -10,8 +10,16 @@ const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ContactList">
-        <Stack.Screen name="ContactList" component={ContactList} />
-        <Stack.Screen name="ContactDetail" component={ContactDetail} />
+        <Stack.Screen
+          name="ContactList"
+          component={ContactList}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ContactDetail"
+          component={ContactDetail}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
