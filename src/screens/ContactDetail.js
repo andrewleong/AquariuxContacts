@@ -6,6 +6,8 @@ import {
   ScrollView,
   View,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
@@ -35,47 +37,52 @@ const ContactDetail = ({navigation}) => {
           </TouchableOpacity>
         }
       />
-      <ScrollView>
-        <View style={styles.circleContainer}>
-          <View style={styles.circle}></View>
-        </View>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        enabled>
+        <ScrollView>
+          <View style={styles.circleContainer}>
+            <View style={styles.circle}></View>
+          </View>
 
-        <View
-          style={{
-            backgroundColor: 'grey',
-            width: '100%',
-          }}>
-          <Text>Main Information</Text>
-          <Text>First Name</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setFirstName}
-            value={firstName}
-          />
-          <View style={styles.hairLine} />
-          <Text>Last Name</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setLastName}
-            value={lastName}
-          />
-          <Text>Sub Information</Text>
-          <Text>Email</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setEmail}
-            value={email}
-          />
-          <View style={styles.hairLine} />
-          <Text>Phone</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setPhone}
-            value={phone}
-          />
-          <View style={styles.hairLine} />
-        </View>
-      </ScrollView>
+          <View
+            style={{
+              backgroundColor: 'grey',
+              width: '100%',
+            }}>
+            <Text>Main Information</Text>
+            <Text>First Name</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setFirstName}
+              value={firstName}
+            />
+            <View style={styles.hairLine} />
+            <Text>Last Name</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setLastName}
+              value={lastName}
+            />
+            <Text>Sub Information</Text>
+            <Text>Email</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setEmail}
+              value={email}
+            />
+            <View style={styles.hairLine} />
+            <Text>Phone</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setPhone}
+              value={phone}
+            />
+            <View style={styles.hairLine} />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
