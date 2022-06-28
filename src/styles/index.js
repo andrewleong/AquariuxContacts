@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   },
   primaryColor: {
     color: '#ff8c00',
+    backgroundColor: '#ff8c00',
   },
   sectionContainer: {
     marginTop: 32,
