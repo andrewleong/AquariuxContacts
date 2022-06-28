@@ -2,9 +2,11 @@ import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
 import globalStyles from '../styles';
 
-const ListItem = ({firstName, lastName}) => {
+const ListItem = ({firstName, lastName, navigation}) => {
+  const handleItemClick = () => navigation?.navigate('ContactDetail');
+
   return (
-    <Pressable onPress={() => console.log('Go to screen 2')}>
+    <Pressable onPress={handleItemClick}>
       <View style={styles.container}>
         <View style={styles.circle}></View>
         <View style={styles.contactName}>

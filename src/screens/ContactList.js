@@ -6,7 +6,7 @@ import ListItem from '../components/ListItem';
 import globalStyles from '../styles';
 import {listContacts} from '../api';
 
-const ContactList = () => {
+const ContactList = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -19,9 +19,15 @@ const ContactList = () => {
     initListContacts();
   }, []);
 
-  const renderItem = ({item}) => (
-    <ListItem firstName={item.firstName} lastName={item.lastName} />
-  );
+  const renderItem = ({item}) => {
+    return (
+      <ListItem
+        firstName={item.firstName}
+        lastName={item.lastName}
+        navigation={navigation}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={globalStyles.mainContainer}>

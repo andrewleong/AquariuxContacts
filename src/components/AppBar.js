@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import globalStyles from '../styles';
+
 const AppBar = props => {
   return (
     <View style={styles.container}>
