@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
-import styles from '../styles';
+import globalStyles from '../styles';
 
 const ListItem = ({firstName, lastName}) => {
   return (
     <Pressable onPress={() => console.log('Go to screen 2')}>
-      <View style={listItemStyles.container}>
-        <View style={listItemStyles.circle}></View>
-        <View style={listItemStyles.contactName}>
+      <View style={styles.container}>
+        <View style={styles.circle}></View>
+        <View style={styles.contactName}>
           <Text>{`${firstName} ${lastName}`}</Text>
         </View>
       </View>
@@ -15,7 +15,7 @@ const ListItem = ({firstName, lastName}) => {
   );
 };
 
-const listItemStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -29,7 +29,7 @@ const listItemStyles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 44 / 2,
-    backgroundColor: styles.primaryColor.backgroundColor,
+    backgroundColor: globalStyles.primaryColor.backgroundColor,
   },
   contactName: {
     paddingHorizontal: 5,

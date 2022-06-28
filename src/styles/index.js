@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const styles = StyleSheet.create({
+const globalStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: 'white',
@@ -9,22 +9,6 @@ const styles = StyleSheet.create({
     color: '#ff8c00',
     backgroundColor: '#ff8c00',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
 });
 
-export default styles;
+export default globalStyles;

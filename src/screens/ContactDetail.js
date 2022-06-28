@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-import styles from '../styles';
+import globalStyles from '../styles';
 
 const ContactDetail = () => {
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <SafeAreaView style={globalStyles.mainContainer}>
       <Text>This is top text.</Text>
       <Text>This is bottom text.</Text>
     </SafeAreaView>

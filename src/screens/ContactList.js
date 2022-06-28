@@ -3,7 +3,7 @@ import {Text, View, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
 import ListItem from '../components/ListItem';
-import styles from '../styles';
+import globalStyles from '../styles';
 import {listContacts} from '../api';
 
 const ContactList = () => {
@@ -24,7 +24,7 @@ const ContactList = () => {
   );
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <SafeAreaView style={globalStyles.mainContainer}>
       <AppBar />
       <FlatList
         data={contacts}
