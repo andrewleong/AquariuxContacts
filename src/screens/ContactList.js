@@ -5,6 +5,7 @@ import AppBar from '../components/AppBar';
 import ListItem from '../components/ListItem';
 import globalStyles from '../styles';
 import {listContacts} from '../api';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const ContactList = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
@@ -31,7 +32,23 @@ const ContactList = ({navigation}) => {
 
   return (
     <SafeAreaView style={globalStyles.mainContainer}>
-      <AppBar />
+      <AppBar
+        title={'Contacts'}
+        leftComponent={
+          <MaterialIcon
+            name="search"
+            size={30}
+            color={globalStyles.primaryColor.color}
+          />
+        }
+        rightComponent={
+          <MaterialIcon
+            name="add"
+            size={30}
+            color={globalStyles.primaryColor.color}
+          />
+        }
+      />
       <FlatList
         data={contacts}
         renderItem={renderItem}

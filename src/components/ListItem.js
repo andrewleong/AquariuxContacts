@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 44 / 2,
-    backgroundColor: globalStyles.primaryColor.backgroundColor,
+    backgroundColor: globalStyles.primaryColor.color,
   },
   contactName: {
     paddingHorizontal: 5,
