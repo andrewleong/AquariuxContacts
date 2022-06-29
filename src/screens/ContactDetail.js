@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -8,6 +8,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Input,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
@@ -19,6 +20,10 @@ const ContactDetail = ({navigation}) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  const lastNameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+  const phoneInputRef = useRef(null);
 
   const handleCancel = () => navigation.goBack();
 
@@ -57,6 +62,10 @@ const ContactDetail = ({navigation}) => {
               style={styles.input}
               onChangeText={text => debounce(setFirstName(text))}
               value={firstName}
+              placeholder="first name"
+              onSubmitEditing={() => {
+                lastNameInputRef.current.focus();
+              }}
             />
           </View>
 
@@ -68,6 +77,11 @@ const ContactDetail = ({navigation}) => {
               style={styles.input}
               onChangeText={text => debounce(setLastName(text))}
               value={lastName}
+              placeholder="last name"
+              ref={lastNameInputRef}
+              onSubmitEditing={() => {
+                emailInputRef.current.focus();
+              }}
             />
           </View>
 
@@ -81,6 +95,11 @@ const ContactDetail = ({navigation}) => {
               style={styles.input}
               onChangeText={text => debounce(setEmail(text))}
               value={email}
+              placeholder="test@furnafix.com"
+              ref={emailInputRef}
+              onSubmitEditing={() => {
+                phoneInputRef.current.focus();
+              }}
             />
           </View>
 
@@ -92,6 +111,8 @@ const ContactDetail = ({navigation}) => {
               style={styles.input}
               onChangeText={text => debounce(setPhone(text))}
               value={phone}
+              placeholder="(997) 123-4567"
+              ref={phoneInputRef}
             />
           </View>
 
