@@ -94,7 +94,7 @@ const ContactDetail = ({navigation}) => {
             <View style={styles.textInputContainer}>
               <TextInput
                 autoCapitalize="none"
-                style={[styles.input, firstNameError && styles.error]}
+                style={[styles.input, firstNameError && styles.errorBorder]}
                 onChangeText={text => {
                   debounce(setFirstName(text));
                   setFirstNameError(false);
@@ -106,7 +106,7 @@ const ContactDetail = ({navigation}) => {
                 }}
               />
               {firstNameError && (
-                <Text style={styles.error}>First name is required</Text>
+                <Text style={styles.errorText}>First name is required</Text>
               )}
             </View>
           </View>
@@ -120,7 +120,7 @@ const ContactDetail = ({navigation}) => {
             <View style={styles.textInputContainer}>
               <TextInput
                 autoCapitalize="none"
-                style={[styles.input, lastNameError && styles.error]}
+                style={[styles.input, lastNameError && styles.errorBorder]}
                 onChangeText={text => {
                   debounce(setLastName(text));
                   setLastNameError(false);
@@ -133,7 +133,7 @@ const ContactDetail = ({navigation}) => {
                 }}
               />
               {lastNameError && (
-                <Text style={styles.error}>Last name is required</Text>
+                <Text style={styles.errorText}>Last name is required</Text>
               )}
             </View>
           </View>
@@ -149,7 +149,7 @@ const ContactDetail = ({navigation}) => {
             <View style={styles.textInputContainer}>
               <TextInput
                 autoCapitalize="none"
-                style={[styles.input, emailError && styles.error]}
+                style={[styles.input, emailError && styles.errorBorder]}
                 onChangeText={text => {
                   debounce(setEmail(text));
                   setEmailError(false);
@@ -162,7 +162,7 @@ const ContactDetail = ({navigation}) => {
                 }}
               />
               {emailError && (
-                <Text style={styles.error}>Provided email is invalid</Text>
+                <Text style={styles.errorText}>Provided email is invalid</Text>
               )}
             </View>
           </View>
@@ -176,7 +176,7 @@ const ContactDetail = ({navigation}) => {
             <View style={styles.textInputContainer}>
               <TextInput
                 autoCapitalize="none"
-                style={[styles.input, phoneError && styles.error]}
+                style={[styles.input, phoneError && styles.errorBorder]}
                 onChangeText={text => {
                   debounce(setPhone(text));
                   setPhoneError(false);
@@ -186,7 +186,7 @@ const ContactDetail = ({navigation}) => {
                 ref={phoneInputRef}
               />
               {phoneError && (
-                <Text style={styles.error}>
+                <Text style={styles.errorText}>
                   Provided phone number is invalid
                 </Text>
               )}
@@ -248,9 +248,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  error: {
-    color: 'red',
+  errorBorder: {
     borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
   },
 });
 
