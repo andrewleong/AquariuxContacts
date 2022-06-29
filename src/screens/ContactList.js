@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useMemo, useCallback} from 'react';
-import {Text, View, FlatList} from 'react-native';
+import {Text, View, FlatList, RefreshControl} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
 import ListItem from '../components/ListItem';
@@ -9,15 +9,23 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const ContactList = ({navigation, route}) => {
   const [contacts, setContacts] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const fetchListContacts = async () => {
+    const result = await listContacts();
+    if (result?.length) {
+      setContacts(result);
+    }
+  };
+
+  const onRefresh = async () => {
+    setIsFetching(true);
+    await fetchListContacts();
+    setIsFetching(false);
+  };
 
   useEffect(() => {
-    const initListContacts = async () => {
-      const result = await listContacts();
-      if (result?.length) {
-        setContacts(result);
-      }
-    };
-    initListContacts();
+    fetchListContacts();
   }, []);
 
   const routeParams = useMemo(() => route.params || {}, [route.params]);
@@ -78,6 +86,9 @@ const ContactList = ({navigation, route}) => {
       <FlatList
         data={contacts}
         renderItem={renderItem}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={onRefresh} />
+        }
         keyExtractor={item => item.id}
         extraData={contacts}
       />
