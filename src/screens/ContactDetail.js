@@ -59,6 +59,7 @@ const ContactDetail = ({navigation}) => {
           <View style={styles.inputRow}>
             <Text>First Name</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.input}
               onChangeText={text => debounce(setFirstName(text))}
               value={firstName}
@@ -74,6 +75,7 @@ const ContactDetail = ({navigation}) => {
           <View style={styles.inputRow}>
             <Text>Last Name</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.input}
               onChangeText={text => debounce(setLastName(text))}
               value={lastName}
@@ -92,6 +94,7 @@ const ContactDetail = ({navigation}) => {
           <View style={styles.inputRow}>
             <Text>Email</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.input}
               onChangeText={text => debounce(setEmail(text))}
               value={email}
@@ -108,6 +111,7 @@ const ContactDetail = ({navigation}) => {
           <View style={styles.inputRow}>
             <Text>Phone</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.input}
               onChangeText={text => debounce(setPhone(text))}
               value={phone}
