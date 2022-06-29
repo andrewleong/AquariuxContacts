@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo, useCallback} from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
@@ -7,7 +7,7 @@ import globalStyles from '../styles';
 import {listContacts} from '../api';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const ContactList = ({navigation}) => {
+const ContactList = ({navigation, route}) => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -20,11 +20,37 @@ const ContactList = ({navigation}) => {
     initListContacts();
   }, []);
 
+  const routeParams = useMemo(() => route.params || {}, [route.params]);
+
+  const onUpdateContact = useCallback(
+    data => {
+      // update the contact after save submission
+      const foundContactIndex = contacts.findIndex(
+        contact => contact.id == data?.id,
+      );
+      if (foundContactIndex !== -1) {
+        const newArray = Object.assign([...contacts], {
+          [foundContactIndex]: data,
+        });
+
+        setContacts(newArray);
+      }
+    },
+    [routeParams],
+  );
+
+  useEffect(() => {
+    onUpdateContact(routeParams);
+  }, [routeParams, onUpdateContact]);
+
   const renderItem = ({item}) => {
     return (
       <ListItem
+        id={item.id}
         firstName={item.firstName}
         lastName={item.lastName}
+        email={item.email}
+        phone={item.phone}
         navigation={navigation}
       />
     );
@@ -53,6 +79,7 @@ const ContactList = ({navigation}) => {
         data={contacts}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        extraData={contacts}
       />
     </SafeAreaView>
   );

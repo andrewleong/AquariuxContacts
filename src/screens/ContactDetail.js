@@ -15,11 +15,12 @@ import AppBar from '../components/AppBar';
 import globalStyles from '../styles';
 import {debounce, validateEmail, validatePhone} from '../utils';
 
-const ContactDetail = ({navigation}) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+const ContactDetail = ({navigation, route}) => {
+  const {params} = route;
+  const [firstName, setFirstName] = useState(params?.firstName);
+  const [lastName, setLastName] = useState(params?.lastName);
+  const [email, setEmail] = useState(params?.email);
+  const [phone, setPhone] = useState(params?.phone);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -55,8 +56,16 @@ const ContactDetail = ({navigation}) => {
       setPhoneError(true);
     }
 
-    // save
-    return;
+    if (!(firstNameError && lastNameError && emailError && phoneError)) {
+      // save
+      navigation.navigate('ContactList', {
+        id: params?.id,
+        firstName,
+        lastName,
+        email,
+        phone,
+      });
+    }
   };
 
   return (

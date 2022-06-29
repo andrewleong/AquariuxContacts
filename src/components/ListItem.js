@@ -2,8 +2,15 @@ import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
 import globalStyles from '../styles';
 
-const ListItem = ({firstName, lastName, navigation}) => {
-  const handleItemClick = () => navigation?.navigate('ContactDetail');
+const ListItem = ({id, firstName, lastName, email, phone, navigation}) => {
+  const handleItemClick = () =>
+    navigation?.navigate('ContactDetail', {
+      id,
+      firstName,
+      lastName,
+      email,
+      phone,
+    });
 
   return (
     <Pressable onPress={handleItemClick}>
