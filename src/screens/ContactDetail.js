@@ -251,18 +251,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
-    borderColor: '#d1d0d1',
+    borderColor: globalStyles.borderGrayColor.color,
   },
   hairLine: {
-    borderColor: '#d1d0d1',
+    borderColor: globalStyles.borderGrayColor.color,
     marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   errorBorder: {
-    borderColor: 'red',
+    borderColor: globalStyles.errorColor.color,
   },
   errorText: {
-    color: 'red',
+    color: globalStyles.errorColor.color,
   },
 });
 
