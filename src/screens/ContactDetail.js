@@ -44,27 +44,29 @@ const ContactDetail = ({navigation, route}) => {
   const handleSave = () => {
     if (!firstName) {
       setFirstNameError(true);
+      return;
     }
     if (!lastName) {
       setLastNameError(true);
+      return;
     }
     if (email && !validateEmail(email)) {
       setEmailError(true);
+      return;
     }
     if (phone && !validatePhone(phone)) {
       setPhoneError(true);
+      return;
     }
 
-    if (!(firstNameError && lastNameError && emailError && phoneError)) {
-      // save
-      navigation.navigate('ContactList', {
-        id: params?.id,
-        firstName,
-        lastName,
-        email,
-        phone,
-      });
-    }
+    // save
+    navigation.navigate('ContactList', {
+      id: params?.id,
+      firstName,
+      lastName,
+      email,
+      phone,
+    });
   };
 
   return (
