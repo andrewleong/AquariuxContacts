@@ -12,6 +12,7 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
 import globalStyles from '../styles';
+import {debounce} from '../utils';
 
 const ContactDetail = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
@@ -54,7 +55,7 @@ const ContactDetail = ({navigation}) => {
             <Text>First Name</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setFirstName}
+              onChangeText={text => debounce(setFirstName(text))}
               value={firstName}
             />
           </View>
@@ -65,7 +66,7 @@ const ContactDetail = ({navigation}) => {
             <Text>Last Name</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setLastName}
+              onChangeText={text => debounce(setLastName(text))}
               value={lastName}
             />
           </View>
@@ -78,7 +79,7 @@ const ContactDetail = ({navigation}) => {
             <Text>Email</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setEmail}
+              onChangeText={text => debounce(setEmail(text))}
               value={email}
             />
           </View>
@@ -89,7 +90,7 @@ const ContactDetail = ({navigation}) => {
             <Text>Phone</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setPhone}
+              onChangeText={text => debounce(setPhone(text))}
               value={phone}
             />
           </View>
