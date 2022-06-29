@@ -13,21 +13,51 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/AppBar';
 import globalStyles from '../styles';
-import {debounce} from '../utils';
+import {debounce, validateEmail, validatePhone} from '../utils';
 
 const ContactDetail = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   const lastNameInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const phoneInputRef = useRef(null);
 
-  const handleCancel = () => navigation.goBack();
+  const handleClearErrors = () => {
+    setFirstNameError(false);
+    setLastNameError(false);
+    setEmailError(false);
+    setPhoneError(false);
+  };
 
-  const handleSave = () => console.log('Saved');
+  const handleCancel = () => {
+    handleClearErrors();
+    navigation.goBack();
+  };
+
+  const handleSave = () => {
+    if (!firstName) {
+      setFirstNameError(true);
+    }
+    if (!lastName) {
+      setLastNameError(true);
+    }
+    if (email && !validateEmail(email)) {
+      setEmailError(true);
+    }
+    if (phone && !validatePhone(phone)) {
+      setPhoneError(true);
+    }
+
+    // save
+    return;
+  };
 
   return (
     <SafeAreaView style={globalStyles.mainContainer}>
@@ -57,34 +87,55 @@ const ContactDetail = ({navigation}) => {
           </View>
 
           <View style={styles.inputRow}>
-            <Text>First Name</Text>
-            <TextInput
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={text => debounce(setFirstName(text))}
-              value={firstName}
-              placeholder="first name"
-              onSubmitEditing={() => {
-                lastNameInputRef.current.focus();
-              }}
-            />
+            <View style={styles.textContainer}>
+              <Text>First Name</Text>
+            </View>
+
+            <View style={styles.textInputContainer}>
+              <TextInput
+                autoCapitalize="none"
+                style={[styles.input, firstNameError && styles.error]}
+                onChangeText={text => {
+                  debounce(setFirstName(text));
+                  setFirstNameError(false);
+                }}
+                value={firstName}
+                placeholder="first name"
+                onSubmitEditing={() => {
+                  lastNameInputRef.current.focus();
+                }}
+              />
+              {firstNameError && (
+                <Text style={styles.error}>First name is required</Text>
+              )}
+            </View>
           </View>
 
           <View style={styles.hairLine} />
 
           <View style={styles.inputRow}>
-            <Text>Last Name</Text>
-            <TextInput
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={text => debounce(setLastName(text))}
-              value={lastName}
-              placeholder="last name"
-              ref={lastNameInputRef}
-              onSubmitEditing={() => {
-                emailInputRef.current.focus();
-              }}
-            />
+            <View style={styles.textContainer}>
+              <Text>Last Name</Text>
+            </View>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                autoCapitalize="none"
+                style={[styles.input, lastNameError && styles.error]}
+                onChangeText={text => {
+                  debounce(setLastName(text));
+                  setLastNameError(false);
+                }}
+                value={lastName}
+                placeholder="last name"
+                ref={lastNameInputRef}
+                onSubmitEditing={() => {
+                  emailInputRef.current.focus();
+                }}
+              />
+              {lastNameError && (
+                <Text style={styles.error}>Last name is required</Text>
+              )}
+            </View>
           </View>
 
           <View style={styles.titleHeader}>
@@ -92,32 +143,54 @@ const ContactDetail = ({navigation}) => {
           </View>
 
           <View style={styles.inputRow}>
-            <Text>Email</Text>
-            <TextInput
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={text => debounce(setEmail(text))}
-              value={email}
-              placeholder="test@furnafix.com"
-              ref={emailInputRef}
-              onSubmitEditing={() => {
-                phoneInputRef.current.focus();
-              }}
-            />
+            <View style={styles.textContainer}>
+              <Text>Email</Text>
+            </View>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                autoCapitalize="none"
+                style={[styles.input, emailError && styles.error]}
+                onChangeText={text => {
+                  debounce(setEmail(text));
+                  setEmailError(false);
+                }}
+                value={email}
+                placeholder="test@furnafix.com"
+                ref={emailInputRef}
+                onSubmitEditing={() => {
+                  phoneInputRef.current.focus();
+                }}
+              />
+              {emailError && (
+                <Text style={styles.error}>Provided email is invalid</Text>
+              )}
+            </View>
           </View>
 
           <View style={styles.hairLine} />
 
           <View style={styles.inputRow}>
-            <Text>Phone</Text>
-            <TextInput
-              autoCapitalize="none"
-              style={styles.input}
-              onChangeText={text => debounce(setPhone(text))}
-              value={phone}
-              placeholder="(997) 123-4567"
-              ref={phoneInputRef}
-            />
+            <View style={styles.textContainer}>
+              <Text>Phone</Text>
+            </View>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                autoCapitalize="none"
+                style={[styles.input, phoneError && styles.error]}
+                onChangeText={text => {
+                  debounce(setPhone(text));
+                  setPhoneError(false);
+                }}
+                value={phone}
+                placeholder="(997) 123-4567"
+                ref={phoneInputRef}
+              />
+              {phoneError && (
+                <Text style={styles.error}>
+                  Provided phone number is invalid
+                </Text>
+              )}
+            </View>
           </View>
 
           <View style={styles.hairLine} />
@@ -148,14 +221,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   inputRow: {
+    flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+  },
+  textContainer: {
+    flex: 0.3,
+    alignItems: 'center',
+  },
+  textInputContainer: {
+    flex: 0.7,
+    marginHorizontal: 15,
+    paddingVertical: 5,
+    alignItems: 'flex-start',
   },
   input: {
-    width: '70%',
+    width: '100%',
     height: 40,
-    margin: 12,
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
@@ -165,6 +247,10 @@ const styles = StyleSheet.create({
     borderColor: '#d1d0d1',
     marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  error: {
+    color: 'red',
+    borderColor: 'red',
   },
 });
 
