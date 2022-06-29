@@ -6,9 +6,11 @@ import ListItem from '../components/ListItem';
 import globalStyles from '../styles';
 import {listContacts} from '../api';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Loader from '../components/Loader';
 
 const ContactList = ({navigation, route}) => {
   const [contacts, setContacts] = useState([]);
+  const [showLoader, setShowLoader] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
   const fetchListContacts = async () => {
@@ -25,7 +27,12 @@ const ContactList = ({navigation, route}) => {
   };
 
   useEffect(() => {
-    fetchListContacts();
+    const initListContacts = async () => {
+      await setShowLoader(true);
+      await fetchListContacts();
+      await setShowLoader(false);
+    };
+    initListContacts();
   }, []);
 
   const routeParams = useMemo(() => route.params || {}, [route.params]);
@@ -92,6 +99,7 @@ const ContactList = ({navigation, route}) => {
         keyExtractor={item => item.id}
         extraData={contacts}
       />
+      {showLoader && <Loader />}
     </SafeAreaView>
   );
 };
