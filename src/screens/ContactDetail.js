@@ -46,41 +46,55 @@ const ContactDetail = ({navigation}) => {
             <View style={styles.circle}></View>
           </View>
 
-          <View
-            style={{
-              backgroundColor: 'grey',
-              width: '100%',
-            }}>
-            <Text>Main Information</Text>
+          <View style={styles.titleHeader}>
+            <Text style={styles.titleHeaderText}>Main Information</Text>
+          </View>
+
+          <View style={styles.inputRow}>
             <Text>First Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={setFirstName}
               value={firstName}
             />
-            <View style={styles.hairLine} />
+          </View>
+
+          <View style={styles.hairLine} />
+
+          <View style={styles.inputRow}>
             <Text>Last Name</Text>
             <TextInput
               style={styles.input}
               onChangeText={setLastName}
               value={lastName}
             />
-            <Text>Sub Information</Text>
+          </View>
+
+          <View style={styles.titleHeader}>
+            <Text style={styles.titleHeaderText}>Sub Information</Text>
+          </View>
+
+          <View style={styles.inputRow}>
             <Text>Email</Text>
             <TextInput
               style={styles.input}
               onChangeText={setEmail}
               value={email}
             />
-            <View style={styles.hairLine} />
+          </View>
+
+          <View style={styles.hairLine} />
+
+          <View style={styles.inputRow}>
             <Text>Phone</Text>
             <TextInput
               style={styles.input}
               onChangeText={setPhone}
               value={phone}
             />
-            <View style={styles.hairLine} />
           </View>
+
+          <View style={styles.hairLine} />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -98,13 +112,32 @@ const styles = StyleSheet.create({
     borderRadius: 120 / 2,
     backgroundColor: globalStyles.primaryColor.color,
   },
+  titleHeader: {
+    padding: 10,
+    backgroundColor: '#f7f7f7',
+    width: '100%',
+  },
+  titleHeaderText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  inputRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
   input: {
+    width: '70%',
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 5,
+    borderColor: '#d1d0d1',
   },
   hairLine: {
+    borderColor: '#d1d0d1',
+    marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
